@@ -51,6 +51,7 @@ int main()
     {
         dim = 4;
         MaxMutari = 30;
+
         MaxTimp = 120;
     }
     else
