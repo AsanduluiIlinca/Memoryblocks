@@ -4,17 +4,17 @@
 #include <string.h>
 #include <conio.h>
 #include <time.h>
-#include <windows.h>
+
 
 using namespace std;
 
-void afisaretablejoc(int matricejoc[50][50], int dim, int viz[50][50])
+void afisareTableJoc(int matriceJoc[][50], int dimMatriceJoc, int vizitat[][50])
 {
-    for(int i = 0; i < dim; i++)
+    for(int linie = 0; linie < dimMatriceJoc; linie++)
     {
-        for(int j = 0; j < dim; j++)
-            if(viz[i][j] == 0) cout << "@ ";
-            else cout << (char)(matricejoc[i][j]+150) << " ";//v[matricejoc[i][j]
+        for(int coloana = 0; coloana < dimMatriceJoc; coloana++)
+            if(vizitat[linie][coloana] == 0) cout << "@ ";
+            else cout << (char)(matriceJoc[linie][coloana]+150) << " ";
         cout << "\n";
     }
 }
@@ -30,7 +30,7 @@ int main()
     while(nivelJoc!= 1 && nivelJoc!= 2 && nivelJoc!=3)
     {
         cout<<"Valoare introdusa nu exista. Eroare.\n";
-        cout<<"Press any key to continue";
+        cout<<"Introduceti orice tasta pentru a continua";
         getch();
         system("cls"); // sterge tot ce am scris
         cout<<"Alege dificultatea jocului: \n";
@@ -40,41 +40,42 @@ int main()
         cin >> nivelJoc;
     }
     system("cls");
-    int dim, MaxMutari, MaxTimp;
+    int dimMatriceJoc, maxMutari, maxTimp;
     if(nivelJoc == 1)
     {
-        dim = 2;
-        MaxMutari = 10;
-        MaxTimp = 20;
+        dimMatriceJoc = 2;
+        maxMutari = 10;
+        maxTimp = 30;
     }
     else if(nivelJoc == 2)
     {
-        dim = 4;
-        MaxMutari = 30;
+        dimMatriceJoc = 4;
+        maxMutari = 30;
 
-        MaxTimp = 120;
+        maxTimp = 120;
     }
     else
     {
-        dim = 6;
-        MaxMutari = 100;
-        MaxTimp = 600;
+        dimMatriceJoc = 6;
+        maxMutari = 100;
+        maxTimp = 600;
     }
-    srand(time(NULL)); // initializeaza rand
-    int v[200], matricejoc[50][50], viz[50][50];
+    srand(time(NULL));
+    int v[200], matriceJoc[50][50], vizitat[50][50];
     memset(v, 0, sizeof(v));
 
-    for(int i = 0; i < dim; i++)
-        for(int j = 0; j < dim; j++)
+    for(int linie = 0; linie < dimMatriceJoc; linie++)
+        for(int coloana = 0; coloana < dimMatriceJoc; coloana++)
         {
-            int nrcarte = rand() % (dim * dim / 2) + 1;
-            while(v[nrcarte] == 2) nrcarte = rand() % (dim * dim / 2) + 1;
-            matricejoc[i][j] = nrcarte;
-            viz[i][j] = 0;
-            v[nrcarte]++;
+            int nrCarte = rand() % (dimMatriceJoc * dimMatriceJoc / 2) + 1;
+            while(v[nrCarte] == 2)
+                nrCarte = rand() % (dimMatriceJoc * dimMatriceJoc / 2) + 1;
+            matriceJoc[linie][coloana] = nrCarte;
+            vizitat[linie][coloana] = 0;
+            v[nrCarte]++;
         }
 
-    int nimerite = 0, NrMutari = 0, Secunde = 0;
+    int cartonaseNimerite = 0, nrMutari = 0, secunde = 0;
 
     clock_t start = clock();
 
@@ -83,32 +84,37 @@ int main()
         system("cls");
 
         clock_t temp = clock();
-        int mutari = MaxMutari - NrMutari, timp = MaxTimp - (temp - start) / CLOCKS_PER_SEC;
-        if(mutari <= 0 || timp <= 0)
+        int mutari = maxMutari - nrMutari, timp = maxTimp - (temp - start) / CLOCKS_PER_SEC;
+        if(mutari <= 0)
         {
-            cout << "Ai ramas fara timp sau fara mutari, Ai pierdut!\n";
+            cout << "Ai ramas fara timp sau fara mutari. Ai pierdut!\n";
+            return 0;
+        }
+        if(timp <= 0)
+        {
+            cout<< "Ai ramas fara timp. Ai pierdut!\n";
             return 0;
         }
         cout << "Mai ai:" << timp << " secunde\n";
         cout << "Mai ai:" << mutari << " mutari\n";
-        afisaretablejoc(matricejoc, dim, viz);
+        afisareTableJoc(matriceJoc, dimMatriceJoc, vizitat);
 
 
-        cout << "Introdu Coordonate Prima Carte:\n";
+        cout << "Introduceti coordonate Prima Carte:\n";
         int xs, ys;
         cin >> xs >> ys;
         xs--;
         ys--;
-        if(viz[xs][ys] != 0 || xs < 0 || xs >= dim || ys < 0 || ys >= dim)
+        if(vizitat[xs][ys] != 0 || xs < 0 || xs >= dimMatriceJoc || ys < 0 || ys >= dimMatriceJoc)
         {
             cout << "Eroare! Cartea a mai fost aleasa o data sau e in afara matrice de joc!";
-            cout<<"Press any key to continue";
+            cout<<"Introduceti orice tasta pentru a continua";
             getch(); //il pune sa apese o tasta
             continue; // il duce inapoi in while
         }
         system("cls");
-        viz[xs][ys] = 1;
-        afisaretablejoc(matricejoc, dim, viz);
+        vizitat[xs][ys] = 1;
+        afisareTableJoc(matriceJoc, dimMatriceJoc, vizitat);
 
 
         cout << "Introdu Coordonate A doua Carte:\n";
@@ -116,45 +122,47 @@ int main()
         cin >> xf >> yf;
         xf--;
         yf--;
-        if(viz[xf][yf] != 0 || xf < 0 || xf >= dim || yf < 0 || yf >= dim)
+        if(vizitat[xf][yf] != 0 || xf < 0 || xf >= dimMatriceJoc || yf < 0 || yf >= dimMatriceJoc)
         {
-            viz[xs][ys] = 0;
+            vizitat[xs][ys] = 0;
             cout << "Eroare! Cartea a mai fost aleasa o data sau e in afara matricei de joc!";
-            cout<<"Press any key to continue";
+            cout<<"Introduceti orice tasta pentru a continua";
             getch();
             continue;
         }
         system("cls");
-        viz[xf][yf] = 1;
-        afisaretablejoc(matricejoc, dim, viz);
+        vizitat[xf][yf] = 1;
+        afisareTableJoc(matriceJoc, dimMatriceJoc, vizitat);
 
-        if(matricejoc[xs][ys] != matricejoc[xf][yf])
+        if(matriceJoc[xs][ys] != matriceJoc[xf][yf])
         {
-            viz[xs][ys] = 0;
-            viz[xf][yf] = 0;
+            vizitat[xs][ys] = 0;
+            vizitat[xf][yf] = 0;
             cout << "Nu ai nimerit\n";
         }
         else
         {
-            nimerite+=2;
-            cout << "Ai nimerit\n";
+            cartonaseNimerite+=2;
+            cout << "Ai nimerit!\n";
         }
 
-        NrMutari++;
-        cout<<"Press any key to continue";
+        nrMutari++;
+        cout<<"Introduceti orice tasta pentru a continua";
         getch();
 
-        if(nimerite == dim * dim) break;
+        if(cartonaseNimerite == dimMatriceJoc * dimMatriceJoc)
+            break;
     }
 
     system("cls");
 
     clock_t finish = clock();
-    Secunde = (finish - start) / CLOCKS_PER_SEC;
+    secunde = (finish - start) / CLOCKS_PER_SEC;
 
-    cout << "Bravo Ai Castigat\n";
-    cout << "Ai rezolvat in:" << Secunde << " Secunde" << '\n';
-    cout << "Ai folosit doar:" << NrMutari << " Mutari" << '\n';
+    cout << "Bravo! Ai Castigat\n";
+    cout << "Ai rezolvat in:" << secunde << " Secunde" << '\n';
+    cout << "Ai folosit doar:" << nrMutari << " Mutari" << '\n';
 
     return 0;
 }
+
