@@ -32,7 +32,7 @@ int main()
         cout<<"Valoare introdusa nu exista. Eroare.\n";
         cout<<"Introduceti orice tasta pentru a continua";
         getch();
-        system("cls"); // sterge tot ce am scris
+        system("cls");
         cout<<"Alege dificultatea jocului: \n";
         cout<<"Pentru nivel usor apasati tasta 1 \n";
         cout<<"Pentru nivel mediu apasati tasta 2 \n";
@@ -100,7 +100,7 @@ int main()
         afisareTableJoc(matriceJoc, dimMatriceJoc, vizitat);
 
 
-        cout << "Introduceti coordonate Prima Carte:\n";
+        cout << "Introduceti coordonate prima carte:\n";
         int xs, ys;
         cin >> xs >> ys;
         xs--;
@@ -109,15 +109,15 @@ int main()
         {
             cout << "Eroare! Cartea a mai fost aleasa o data sau e in afara matrice de joc!";
             cout<<"Introduceti orice tasta pentru a continua";
-            getch(); //il pune sa apese o tasta
-            continue; // il duce inapoi in while
+            getch();
+            continue;
         }
         system("cls");
         vizitat[xs][ys] = 1;
         afisareTableJoc(matriceJoc, dimMatriceJoc, vizitat);
 
 
-        cout << "Introdu Coordonate A doua Carte:\n";
+        cout << "Introduceti coordonate a doua carte:\n";
         int xf,yf;
         cin >> xf >> yf;
         xf--;
