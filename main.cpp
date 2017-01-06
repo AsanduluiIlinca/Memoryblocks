@@ -52,13 +52,13 @@ int main()
         dimMatriceJoc = 4;
         maxMutari = 30;
 
-        maxTimp = 120;
+        maxTimp = 160;
     }
     else
     {
         dimMatriceJoc = 6;
         maxMutari = 100;
-        maxTimp = 600;
+        maxTimp = 660;
     }
     srand(time(NULL));
     int v[200], matriceJoc[50][50], vizitat[50][50];
@@ -165,4 +165,3 @@ int main()
 
     return 0;
 }
-
