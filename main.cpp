@@ -194,7 +194,7 @@ int main()
     clock_t finish = clock();
     secunde = (finish - start) / CLOCKS_PER_SEC;
 
-    cout << "Bravo Ai Castigat\n";
+    cout << "Bravo! Ai castigat!\n";
     cout << "Ai rezolvat in:" << secunde << " Secunde" << '\n';
     cout << "Ai folosit doar:" << nrMutari << " Mutari" << '\n';
 
