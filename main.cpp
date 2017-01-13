@@ -47,12 +47,10 @@ int main()
     listaMutariStart = listaMutari;
     unsigned short culoare;
     tablaJoc matriceJoc, vizitat;
-    cout<<"Cum joc? \n Jocul are 3 niveluri, care contin cate o tabla cu din ce in ce mai multe casute. Aveti restrictii de timp si de mutari. \n ";
-    cout<<"Casutele de la nivelul usor vor putea fii accesate prin numerele de la 1 la 4. Casutele vor putea fii accesate astfel:\n1 2\n3 4 \n ";
-    cout<<"Pentru nivelul mediu :\n1  2  3  4\n5  6  7  8\n9  10 11 12\n13 14 15 16\n Pentru nivelul greu :\n1  2  3  4  5  6\n7  8  9  10 11 12 \n13 14 15 16 17 18\n19 20 21 22 23 24\n25 26 27 28 19 30\n31 32 33 34 35 36\n";
-    /*cout<<"Alegeti culoarea jocului: \n 0 = Negru \n 1 = Albastru \n 2 = Verde \n 3 = Aqua\n 4 = Rosu\n 5 = Purpuriu\n 6 = Galben\n 7 = Alb\n 8 = Gri\n 9 = Albastru deschis\n A = Verde deschis\n B = Aqua deschis\n C = Rosu deschis\n D = Purpuriu deschis\n E = Galben deschis\n F = Alb stralucito\n ";
-    cin>>culoare;
-    setareCuloare(culoare);*/
+    cout<<"Cum joc? \nJocul are 3 niveluri, care contin cate o tabla cu din ce in ce\nmai multe casute. Aveti restrictii de timp si de mutari. \n";
+    cout<<"Casutele de la nivelul usor vor putea fii accesate prin numerele de la 1 la 4.\nCasutele vor putea fii accesate astfel:\n1 2\n3 4 \n";
+    cout<<"Pentru nivelul mediu :\n1  2  3  4\n5  6  7  8\n9  10 11 12\n13 14 15 16\nPentru nivelul greu :\n1  2  3  4  5  6\n7  8  9  10 11 12 \n13 14 15 16 17 18\n19 20 21 22 23 24\n25 26 27 28 19 30\n31 32 33 34 35 36\n";
+
     cout<<"Alege dificultatea jocului: \n";
     cout<<"Pentru nivel usor apasati tasta 1 \n";
     cout<<"Pentru nivel mediu apasati tasta 2 \n";
